@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-import numpy as np
 import pickle
 
 # importing model
@@ -19,7 +18,7 @@ def get_prediction():
     rainfall = request.form['Rainfall']
 
     feature_list = [N, P, K, temp, humidity, ph, rainfall]
-    single_pred = np.array(feature_list).reshape(1, -1)
+    single_pred = [feature_list]
 
     scaled_features = ms.fit_transform(single_pred)
     print(scaled_features)
