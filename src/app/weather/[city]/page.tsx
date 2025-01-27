@@ -6,7 +6,7 @@ export default async function Page({
   params: Promise<{ city: string}>
 }){
 
-  const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
+  const API_KEY = process.env.OPEN_WEATHER_API_KEY;
   const city = (await params).city.unslugify()
 
   const geoRes = await fetch(
