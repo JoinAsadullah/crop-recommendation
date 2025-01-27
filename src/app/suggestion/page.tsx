@@ -10,7 +10,7 @@ const sql = neon(process.env.DATABASE_URL || '');
 
 export default async function CropSuggestionPage({
     searchParams,
-  }: { searchParams: { [key: string]: string | undefined } }) {
+  }: { searchParams: Promise<{ [key: string]: string | undefined }> }) {
     const nitrogen = (await searchParams).nitrogen ?? ""
     const phosphorus = (await searchParams).phosphorus ?? ""
     const potassium = (await searchParams).potassium ?? ""
@@ -40,13 +40,6 @@ function minMaxScale(features : number[], minVals: number[], maxVals: number[]) 
 
 const prediction = score(minMaxScale(features, minVals, maxVals));
 const predictedClassIndex = prediction.indexOf(Math.max(...prediction))+1;
-
-const crop_dict = ["Rice","Maize","Jute","Cotton","Coconut","Papaya","Orange",
-"Apple","Muskmelon", "Watermelon", "Grapes", "Mango", "Banana",
-  "Pomegranate", "Lentil", "Blackgram", "Mungbean", "Mothbeans",
-  "Pigeonpeas", "Kidneybeans", "Chickpea", "Coffee"]
-
-const crop = crop_dict[predictedClassIndex-1];
 
 const cropData = await sql`
   SELECT *

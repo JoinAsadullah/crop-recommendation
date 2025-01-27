@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import {
     CheckCircle,
     Circle,
@@ -15,7 +15,7 @@ export default function ManagementPlan({ tasksData } : { tasksData: any[] }) {
             id: task.task_id,
             description: task.description,
             frequency: task.frequency,
-            lastCompleted: null
+            lastCompleted: null as Date | null
         }
     })
 
@@ -25,34 +25,34 @@ export default function ManagementPlan({ tasksData } : { tasksData: any[] }) {
 
   const [completedTasks, setCompletedTasks] = useState<number[]>([])
 
-  useEffect(() => {
-    const today = new Date()
-    const updatedTasks = tasks.map((task) => {
-      if (task.lastCompleted) {
-        const daysSinceLastCompleted = Math.floor((today.getTime() - task.lastCompleted.getTime()) / (1000 * 3600 * 24))
-        if (
-          (task.frequency === "daily" && daysSinceLastCompleted >= 1) ||
-          (task.frequency === "weekly" && daysSinceLastCompleted >= 7) ||
-          (task.frequency === "monthly" && daysSinceLastCompleted >= 30)
-        ) {
-          return { ...task, lastCompleted: null }
-        }
-      }
-      return task
-    })
-  }, []) // Added tasks to the dependency array
+//   useEffect(() => {
+//     const today = new Date()
+//     const updatedTasks = tasks.map((task) => {
+//       if (task.lastCompleted) {
+//         const daysSinceLastCompleted = Math.floor((today.getTime() - task.lastCompleted.getTime()) / (1000 * 3600 * 24))
+//         if (
+//           (task.frequency === "daily" && daysSinceLastCompleted >= 1) ||
+//           (task.frequency === "weekly" && daysSinceLastCompleted >= 7) ||
+//           (task.frequency === "monthly" && daysSinceLastCompleted >= 30)
+//         ) {
+//           return { ...task, lastCompleted: null }
+//         }
+//       }
+//       return task
+//     })
+//   }, []) // Added tasks to the dependency array
 
   const toggleTask = (taskId: number) => {
-    setCompletedTasks((prev) => {
-      const newCompletedTasks = prev.includes(taskId) ? prev.filter((id) => id !== taskId) : [...prev, taskId]
+      setCompletedTasks((prev) => {
+        const newCompletedTasks = prev.includes(taskId) ? prev.filter((id) => id !== taskId) : [...prev, taskId]
+  
+        setTasks(tasks.map((task) => (task.id === taskId ? { ...task, lastCompleted: new Date() as Date | null } : task)))
+  
+        return newCompletedTasks
+      })
+    }
 
-      setTasks(tasks.map((task) => (task.id === taskId ? { ...task, lastCompleted: new Date() } : task)))
-
-      return newCompletedTasks
-    })
-  }
-
-  const getTaskStatus = (task: Task) => {
+  const getTaskStatus = (task: { id: number; description: string; frequency: string; lastCompleted: Date | null }) => {
     if (completedTasks.includes(task.id)) return "completed"
     if (task.lastCompleted === null) return "due"
     return "upcoming"
