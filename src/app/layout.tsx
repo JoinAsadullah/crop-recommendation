@@ -27,9 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[url(/background.jpeg)] bg-cover bg-no-repeat bg-center`}
       >
-        <main className=" h-svh">
+        <main className="pb-8 opacity-90 bg-white bg-opacity-30">
 
           <div className="fixed top-0 w-full bg-gray-200 z-50 ">
             <section className="bg-gray-100 h-20 flex justify-between items-center">
@@ -63,7 +63,7 @@ export default function RootLayout({
             </section>
 
           </div>
-          <div className="pt-[120px] ">
+          <div className="pt-[100px]">
             {children}
           </div>
           <div>

@@ -28,10 +28,25 @@ export default function CropSuggestionPage() {
     }))
   }
 
+  const handleFillClick = () => {
+    //rice 90	42	43		82.00274423	6.502985292	202.9355362
+
+    setFormData({
+      nitrogen: "90",
+      phosphorus: "42",
+      potassium: "43",
+      temperature: "20.87974371",
+      humidity: "82.00274423",
+      ph: "6.502985292",
+      rainfall: "202.9355362",
+    })
+  }
+
   return (
     <div className="min-h-screen p-4 sm:p-8 ">
-      <div className="max-w-6xl mx-auto  bg-gray-50 rounded-lg shadow-md p-6 sm:p-10">
+      <div className="max-w-6xl mx-auto  bg-gray-100 rounded-lg shadow-md p-6 sm:p-10">
         <h1 className="text-3xl font-bold text-center text-gray-700 mb-8">Crop Suggestion</h1>
+        <button onClick={handleFillClick} className="text-xl font-bold text-gray-700 mb-2">📃</button>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {Object.entries(formData).map(([key, value]) => (
