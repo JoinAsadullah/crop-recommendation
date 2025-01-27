@@ -32,10 +32,18 @@ export default function RootLayout({
 
           <div className="fixed top-0 w-full bg-gray-200 z-50 ">
             <section className="bg-gray-100 h-20 flex justify-between items-center">
-              <Link href="/">
+             <Link href="/">
                 <div className=" ml-4 flex justify-between items-center">
                   <h1 className="font-semibold text-2xl text-green-500 text-outline">AGRI ADVICE</h1>
                 </div>
+              </Link>
+              <div className="flex justify-between items-center space-x-4">
+ 
+              <Link href="/" className="text-green-600 underline max-md:hidden">
+                HOME
+              </Link>
+              <Link href="/weather" className="text-green-600 underline">
+                WEATHER
               </Link>
               <Link href="/about">
                 <div className="w-12 h-6 font-black text-gray-600">
@@ -58,7 +66,7 @@ export default function RootLayout({
                     </g>
                   </svg>
 
-                </div></Link>
+                </div></Link></div>
             </section>
 
           </div>

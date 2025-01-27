@@ -19,7 +19,6 @@ export default async function CropSuggestionPage({
     const ph = (await searchParams).ph ?? ""
     const rainfall = (await searchParams).rainfall ?? ""
 
-    await new Promise(resolve => setTimeout(resolve, 2000));
     
 const minVals = [ 0, 5, 5, 8.82567475, 14.27327988, 3.50475231, 20.36001144]
 const maxVals = [140, 145, 205, 43.67549305, 99.98187601, 9.93509073, 298.5601175]
